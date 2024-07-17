@@ -1,21 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class Amebee_logic : MonoBehaviour
 {
-    
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    [SerializeField] private TextAsset[] InkJSON;
+    private bool vaFattoEntrare;
+    private static Amebee_logic instance;
+     
+    void Awake(){
+        instance=this;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public static Amebee_logic GetInstance(){
+        return instance; 
+    }
+    public TextAsset GetTextAsset(){
+        return InkJSON[Random.Range(0,InkJSON.Length)];
     }
 }
 
