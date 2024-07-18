@@ -12,12 +12,13 @@ public class Amebee_logic : MonoBehaviour
      
     void Awake(){
         instance=this;
+    
     }
     public static Amebee_logic GetInstance(){
         return instance; 
     }
     public TextAsset GetTextAsset(){
-        return InkJSON[Random.Range(0,InkJSON.Length)];
+        return InkJSON[0];
     }
 }
 
