@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Ink.Runtime;
 using TMPro;
 using TMPro.Examples;
@@ -30,9 +31,9 @@ public class DialogueManager : MonoBehaviour
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
         pressTitle.SetActive(false);
-        choicesText = new TextMeshProUGUI(dialogueChoices.text);
+        choicesText = new TextMeshProUGUI[choices.Length];
         int index=0;
-        foreach(GameObject choices in choices){
+        foreach(GameObject choice in choices){
             choicesText[index]= choice.GetComponentInChildren<TextMeshProUGUI>();
             index++;
         }
@@ -69,18 +70,18 @@ public class DialogueManager : MonoBehaviour
     }
 
     private void DisplayChoices(){
-        List<Choice> currentChoices = currentStory.currentChoices;
-        if(currentChoices.Count> choices.Lenght){
+        List<Choice> currentChoices = story.currentChoices;
+        if(currentChoices.Count> choices.Length){
             Debug.LogError("Hai superato il massimo di scelte ");
         }
         pressTitle.SetActive(true);
         int index = 0;
         foreach(Choice choice in currentChoices){
             choices[index].gameObject.SetActive(true);
-            choicesText[index].Text = choice.text;
+            choicesText[index].text = choice.text;
             index++;
         }
-        for(int i = index; i < choices.Lenght; i++){
+        for(int i = index; i < choices.Length; i++){
             choices[i].gameObject.SetActive(true);
         }
 
