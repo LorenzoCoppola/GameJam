@@ -28,9 +28,8 @@ public class DialogueManager : MonoBehaviour
         story = new Story(InkJSON.text);
         dialogueIsPlaying=true;
         dialoguePanel.SetActive(true);
-        if(story.canContinue){
-            dialogueText.text= story.Continue();
-        }
+        ContinueStory();
+        Debug.Log(InkJSON.text);
     }
     public void ExitDialogueMode(){
         dialogueIsPlaying=false;
@@ -45,6 +44,13 @@ public class DialogueManager : MonoBehaviour
         {
             return;
         }
-        
+        if(Input.GetKeyDown(KeyCode.Return)){
+            ContinueStory();
+        }
+    }
+    private void ContinueStory(){
+        if(story.canContinue){
+            dialogueText.text= story.Continue();
+        }
     }
 }
