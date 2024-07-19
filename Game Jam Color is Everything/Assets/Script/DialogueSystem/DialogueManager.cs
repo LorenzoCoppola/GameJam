@@ -3,6 +3,7 @@ using Ink.Runtime;
 using TMPro;
 using TMPro.Examples;
 using Unity.PlasticSCM.Editor.WebApi;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
@@ -37,6 +38,9 @@ public class DialogueManager : MonoBehaviour
             choicesText[index]= choice.GetComponentInChildren<TextMeshProUGUI>();
             index++;
         }
+        for(int i=0;i<choices.Length;i++){
+            choices[i].SetActive(false);
+        }
     }
     public void EnterDialogueMode(TextAsset InkJSON){
         story = new Story(InkJSON.text);
@@ -65,7 +69,9 @@ public class DialogueManager : MonoBehaviour
     private void ContinueStory(){
         if(story.canContinue){
             dialogueText.text= story.Continue();
-            DisplayChoices();
+            if(story.currentChoices.Count!=0){
+                DisplayChoices();
+            }
         }
     }
 

@@ -7,19 +7,25 @@ using UnityEngine;
 public class Amebee_logic : MonoBehaviour
 {
     [SerializeField] private TextAsset[] InkJSON;
+    private int[] numeri;
     private bool vaFattoEntrare;
     private static Amebee_logic instance;
-     
-    void Awake(){
-        instance=this;
     
+    void Awake(){
+        if(instance==null){
+            instance=this;
+        }
     }
     public static Amebee_logic GetInstance(){
         return instance; 
     }
-    public TextAsset GetTextAsset(){
-        return InkJSON[0];
+    public int Getnumb(){
+        return numeri[Random.Range(0,numeri.Length)];
     }
+    public TextAsset GetTextAsset(){
+        return InkJSON[Random.Range(0,InkJSON.Length)];
+    }
+
 }
 
 
